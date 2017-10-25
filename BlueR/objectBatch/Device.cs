@@ -20,7 +20,7 @@ namespace objectBatch
 
         #region Constructors
         /// <summary>
-        /// Permit to create an Device object.
+        /// Allow you to create a Device object.
         /// </summary>
         /// <param name="idDevice">The id of the device, for find it. Is an int.</param>
         /// <param name="deviceName">The name of the device, for show it in a form. Is a string.</param>
