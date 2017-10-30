@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 /// objectBatch will contain all the object that we will need for this software.
 /// </summary>
 namespace objectBatch
-{//New Branch
+{
     /// <summary>
     /// Device is an object that will register informations about a device connected to this software in Bluetooth.
     /// </summary>
