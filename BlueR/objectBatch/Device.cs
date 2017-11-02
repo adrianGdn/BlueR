@@ -32,6 +32,18 @@ namespace objectBatch
             this.setIdBluetooth(idBluetooth);
             this.setAddressMail(addressMail);
         }
+
+        /// <summary>
+        /// Allow you to create a Device object.
+        /// </summary>
+        /// <param name="deviceName">The name of the device, for show it in a form. It's a string.</param>
+        /// <param name="idBluetooth">The Bluetooth ID of the device, for send differents things. It's a string.</param>
+        public Device(string deviceName, string idBluetooth)
+        {
+            this.setDeviceName(deviceName);
+            this.setIdBluetooth(idBluetooth);
+            this.setAddressMail(null);
+        }
         #endregion
         #region Getters
         /// <summary>
@@ -59,7 +71,7 @@ namespace objectBatch
             return this.addressMail;
         }
         #endregion
-#region setters 
+        #region Setters 
         /// <summary>
         /// Allow you to set the device name.
         /// </summary>
