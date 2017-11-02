@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using objectBatch;
 
+
 namespace MainView
 {
     public partial class MainView : Form
@@ -20,7 +21,14 @@ namespace MainView
 
         private void MainView_Load(object sender, EventArgs e)
         {
-            objectBatch.GestionBluetooth.Test();
+            
+        }
+
+        private void scanButton_Click(object sender, EventArgs e)
+        {
+            List<Device> list = GestionBluetooth.Scan();
+            listDevice.DataSource = list;
+
         }
     }
 }

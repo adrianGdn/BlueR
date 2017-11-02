@@ -28,14 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.scanButton = new System.Windows.Forms.Button();
+            this.listDevice = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
+            // 
+            // scanButton
+            // 
+            this.scanButton.Location = new System.Drawing.Point(55, 143);
+            this.scanButton.Name = "scanButton";
+            this.scanButton.Size = new System.Drawing.Size(75, 23);
+            this.scanButton.TabIndex = 0;
+            this.scanButton.Text = "scan";
+            this.scanButton.UseVisualStyleBackColor = true;
+            this.scanButton.Click += new System.EventHandler(this.scanButton_Click);
+            // 
+            // listDevice
+            // 
+            this.listDevice.FormattingEnabled = true;
+            this.listDevice.ItemHeight = 16;
+            this.listDevice.Location = new System.Drawing.Point(55, 197);
+            this.listDevice.Name = "listDevice";
+            this.listDevice.Size = new System.Drawing.Size(1181, 116);
+            this.listDevice.TabIndex = 1;
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 351);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientSize = new System.Drawing.Size(1248, 412);
+            this.Controls.Add(this.listDevice);
+            this.Controls.Add(this.scanButton);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainView";
             this.Text = "MainView";
             this.Load += new System.EventHandler(this.MainView_Load);
@@ -44,6 +67,9 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button scanButton;
+        private System.Windows.Forms.ListBox listDevice;
     }
 }
 

@@ -21,10 +21,10 @@ namespace objectBatch
             //BluetoothDeviceInfo[] peersInRange2 = cli.DiscoverDevices(255, false, false, false, true);
             foreach (BluetoothDeviceInfo peer in peers)
             {
-                if(peer.Remembered) //mettre a faux pour avoir la liste réelle.
+                if(!peer.Remembered) //mettre a faux pour avoir la liste réelle.
                 {
                     //@toDo : changer l'id du Device 
-                    listDevice.Add(new Device(42, peer.DeviceName, peer.DeviceAddress.ToString(), "test@test.com"));
+                    listDevice.Add(new Device(peer.DeviceName, peer.DeviceAddress.ToString(), "test@test.com"));
                 }
             }
             return listDevice;

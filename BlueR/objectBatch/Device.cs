@@ -14,7 +14,6 @@ namespace objectBatch
     /// </summary>
     public class Device
     {
-        int idDevice;
         string deviceName;
         string idBluetooth;
         string addressMail;
@@ -24,27 +23,17 @@ namespace objectBatch
         /// <summary>
         /// Allow you to create a Device object.
         /// </summary>
-        /// <param name="idDevice">The id of the device, for find it. It's an int.</param>
         /// <param name="deviceName">The name of the device, for show it in a form. It's a string.</param>
         /// <param name="idBluetooth">The Bluetooth ID of the device, for send differents things. It's a string.</param>
         /// <param name="addressMail">The mail address of the user of the device. This is a string.</param>
-        public Device(int idDevice, string deviceName, string idBluetooth, string addressMail)
+        public Device( string deviceName, string idBluetooth, string addressMail)
         {
-            this.setIdDevice(idDevice);
             this.setDeviceName(deviceName);
             this.setIdBluetooth(idBluetooth);
             this.setAddressMail(addressMail);
         }
         #endregion
         #region Getters
-        /// <summary>
-        /// Allow you to get the device ID.
-        /// </summary>
-        /// <returns>Return the current ID of that device. It's an int.</returns>
-        public int getIdDevice()
-        {
-            return this.idDevice;
-        }
         /// <summary>
         /// Allow you to get the device name.
         /// </summary>
@@ -70,15 +59,7 @@ namespace objectBatch
             return this.addressMail;
         }
         #endregion
-        #region Setters
-        /// <summary>
-        /// Allow you to set the device ID.
-        /// </summary>
-        /// <param name="idDevice">The id of the device, for find it. It's an int.</param>
-        protected void setIdDevice(int idDevice)
-        {
-            this.idDevice = idDevice;
-        }
+#region setters 
         /// <summary>
         /// Allow you to set the device name.
         /// </summary>
@@ -111,11 +92,9 @@ namespace objectBatch
         /// <returns>Return a sentence with few attribute.</returns>
         public override string ToString()
         {
-            string msg;
-            msg = "Le nom de l'appareil est : " + this.getDeviceName()
-                + ", l'adresse mail associé à cette appareil est : " + this.getIdBluetooth()
-                + ", l'identifiant BLuetooth de cette appareil est : ";            
-            return msg;
+             return "Le nom de l'appareil est : " + this.getDeviceName()
+                + ", l'adresse mail associé à cette appareil est : " + this.getAddressMail()
+                + ", l'identifiant BLuetooth de cette appareil est : "+ this.getIdBluetooth();
         }
         #endregion
     }
