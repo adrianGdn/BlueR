@@ -78,5 +78,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\objectBatch\objectBatch.csproj">
+      <Project>{aa65ff3f-b811-4e6c-b5f9-b86c10477ea5}</Project>
+      <Name>objectBatch</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

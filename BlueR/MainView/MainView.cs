@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using objectBatch;
+
 
 namespace MainView
 {
@@ -15,6 +17,18 @@ namespace MainView
         public MainView()
         {
             InitializeComponent();
+        }
+
+        private void MainView_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void scanButton_Click(object sender, EventArgs e)
+        {
+            List<Device> list = GestionBluetooth.Scan();
+            listDevice.DataSource = list;
+
         }
     }
 }
