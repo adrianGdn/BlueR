@@ -4,7 +4,7 @@ package com.epsi.dugama.BlueR;
  * Hello world!
  *
  */
-public class App 
+public class MainApp 
 {
     public static void main( String[] args )
     {
