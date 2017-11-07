@@ -16,7 +16,7 @@
 CREATE TABLE IF NOT EXISTS `Device` (
   `idBluetooth` char(50) NOT NULL,
   `deviceName` char(50) NOT NULL,
-  `addressMail` decimal(30),
+  `addressMail` char(30),
   PRIMARY KEY (`idBluetooth`)
 ) ENGINE=InnoDB;
 
