@@ -7,8 +7,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple MainApp.
  */
-public class MainAppTest 
-    extends TestCase
+public class MainAppTest  extends TestCase
 {
     /**
      * Create the test case

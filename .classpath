@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="BlueR/src/main/java"/>
+	<classpathentry kind="src" path="BlueR/src/test/java"/>
+	<classpathentry kind="lib" path="D:/EPSI/B3/Dev/Java/BlueR/lib/bluecove-2.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/EPSI/B3/Dev/Java/BlueR/lib/bluecove-bluez-2.1.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
