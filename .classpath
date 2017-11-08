@@ -5,5 +5,9 @@
 	<classpathentry kind="src" path="BlueR/src/test/java"/>
 	<classpathentry kind="lib" path="D:/EPSI/B3/Dev/Java/BlueR/lib/bluecove-2.1.1.jar"/>
 	<classpathentry kind="lib" path="D:/EPSI/B3/Dev/Java/BlueR/lib/bluecove-bluez-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alexis/.m2/repository/junit/junit/4.12/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alexis/.m2/repository/junit/junit/4.12/junit-4.12-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alexis/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alexis/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

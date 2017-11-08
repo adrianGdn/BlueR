@@ -13,6 +13,10 @@ public class BluetoothHandler {
         
     }
 
+    /**
+     * search the local device with blueCove
+     * call this method on main to begin the scan
+     */
     void start() {
         DiscoveryListener listener = new DeviceDiscovery();
 
