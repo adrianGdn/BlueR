@@ -133,7 +133,7 @@ public class DAO {
 			// Step 5 : We travel "ResultSet" in order to find the searched value
 			while (rs.next() && deviceFound == false) {
 				aDevice = new Device(rs.getString("deviceName"), rs.getString("idBluetooth"), rs.getString("mailAddress"));
-				if (aDevice.getIdBluetooth() == idBluetoothOfTheSearchedDevice) {
+				if (aDevice.getIdBluetooth().equals(idBluetoothOfTheSearchedDevice)) {
 					deviceFound = true;
 				}
 			}
