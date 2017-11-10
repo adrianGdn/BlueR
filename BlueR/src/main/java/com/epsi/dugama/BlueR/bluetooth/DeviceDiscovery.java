@@ -16,7 +16,6 @@ import javax.obex.HeaderSet;
 import javax.obex.Operation;
 import javax.obex.ResponseCodes;
 
-import com.epsi.dugama.BlueR.bluetooth.BluetoothHandler;
 import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.DataElement;
 
@@ -64,7 +63,16 @@ public class DeviceDiscovery implements DiscoveryListener {
 		} catch (Exception e) {
 			name = btDevice.getBluetoothAddress();
 		}
-		System.out.println("device found: " + name);
+		int rssi = 0;
+		try {
+			System.out.println( btDevice);
+			rssi = RemoteDeviceHelper.readRSSI(btDevice); //risque de donner une exception
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("device found: " + name + " rssi " + rssi);
 	}
 
 	@Override
@@ -92,7 +100,7 @@ public class DeviceDiscovery implements DiscoveryListener {
 
 			DataElement serviceName = services[i].getAttributeValue(0x0100);
 			try {
-				System.out.println( "rssi" + RemoteDeviceHelper.readRSSI(services[i].getHostDevice()));
+				System.out.println( "rssi" + RemoteDeviceHelper.readRSSI(services[i].getHostDevice())); //risque de donner une exception
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -169,12 +177,12 @@ public class DeviceDiscovery implements DiscoveryListener {
 	public void serviceSearchCompletedOld(int transID, int respCode) {
 		System.out.println("serviceSearchCompleted");
 	}
-
+	/*
 	public void inquiryCompletedOld(int discType) {
 		System.out.println("Recherche terminé !");
 		synchronized (BluetoothHandler.inquiryCompletedEvent) {
 			BluetoothHandler.inquiryCompletedEvent.notifyAll();
 		}
-	}
+	} */
 
 }
