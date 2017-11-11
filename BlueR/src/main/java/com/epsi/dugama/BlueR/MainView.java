@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import java.awt.Window.Type;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.SystemColor;
 
 public class MainView {
 	private JFrame frmBluer;
@@ -83,7 +84,7 @@ public class MainView {
 		lblChooseDevice.setBounds(10, 32, 414, 14);
 		frmBluer.getContentPane().add(lblChooseDevice);		
 		
-		final JComboBox comboBox_DevicesList = new JComboBox();
+		final JComboBox<String> comboBox_DevicesList = new JComboBox<String>();
 		comboBox_DevicesList.setFont(new Font("Arial", Font.PLAIN, 11));
 		comboBox_DevicesList.setEnabled(false);
 		comboBox_DevicesList.setToolTipText("");
@@ -124,7 +125,7 @@ public class MainView {
 		lblPicture.setBounds(0, 131, 128, 140);
 		frmBluer.getContentPane().add(lblPicture);
 		
-		JLabel lblDeveloper = new JLabel("Developt by DUBUS ALexis, MATTON Maxence and GANDON Adrian.");
+		JLabel lblDeveloper = new JLabel("Developt by DUBUS Alexis, MATTON Maxence and GANDON Adrian.");
 		lblDeveloper.setEnabled(false);
 		lblDeveloper.setFont(new Font("Arial", Font.ITALIC, 10));
 		lblDeveloper.setBounds(93, 257, 331, 14);
@@ -136,11 +137,18 @@ public class MainView {
 		lblProjectBlueR.setBounds(318, 246, 106, 14);
 		frmBluer.getContentPane().add(lblProjectBlueR);
 		
+		JButton btnSeeDBRegisteredDevice = new JButton("Click on me to see the registered device of the database");
+		btnSeeDBRegisteredDevice.setBackground(SystemColor.menu);
+		btnSeeDBRegisteredDevice.setFont(new Font("Arial", Font.PLAIN, 9));
+		btnSeeDBRegisteredDevice.setBounds(155, 138, 275, 23);
+		frmBluer.getContentPane().add(btnSeeDBRegisteredDevice);
+		
 		btnCheckPresentDevice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				/////////////////////////////// Action for the "Check present device" here ///////////////////////////////
 				comboBox_DevicesList.setEnabled(true);
 				// We load the device of the DB --> will change after
+				// This part had to be deleted, but was enabled to test the list
 				devices = DAO.getDevices();
 				for (int i = 0; i < devices.size(); i++) {
 					comboBox_DevicesList.addItem(devices.get(i).getDeviceName());
@@ -158,6 +166,71 @@ public class MainView {
 			public void actionPerformed(ActionEvent e) {
 				/////////////////////////////// Action for the "Send data" here ///////////////////////////////
 				JOptionPane.showMessageDialog(null, "The data has been correctly send.\nThanks for have use BlueR app.");
+			}
+		});
+		btnSeeDBRegisteredDevice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame frmBluer2 = new JFrame();
+				
+				
+				/////////////////////////// FRM creation  ///////////////////////////
+				frmBluer2.setBackground(Color.WHITE);
+				frmBluer2.setResizable(false);
+				frmBluer2.setType(Type.UTILITY);
+				frmBluer2.setTitle("BlueR - Existing Device");
+				frmBluer2.getContentPane().setForeground(Color.BLACK);
+				frmBluer2.getContentPane().setFont(new Font("Arial", Font.PLAIN, 11));
+				frmBluer2.setBounds(632, 100, 438, 300);
+				frmBluer2.getContentPane().setLayout(null);
+					
+				
+				/////////////////////////// Get devices on DB operation ///////////////////////////
+				JLabel lblInfoCheckPresentDevice2 = new JLabel("This is the list of the device which was registered on DB :");
+				lblInfoCheckPresentDevice2.setFont(new Font("Arial", Font.PLAIN, 12));
+				lblInfoCheckPresentDevice2.setBounds(10, 5, 414, 14);
+				frmBluer2.getContentPane().add(lblInfoCheckPresentDevice2);
+				
+				JComboBox<String> comboBox_DevicesDBList2 = new JComboBox<String>();
+				comboBox_DevicesDBList2.setFont(new Font("Arial", Font.PLAIN, 11));
+				comboBox_DevicesDBList2.setEnabled(true);
+				comboBox_DevicesDBList2.setToolTipText("");
+				comboBox_DevicesDBList2.setBounds(10, 25, 414, 23);
+				frmBluer2.getContentPane().add(comboBox_DevicesDBList2);
+				
+				//////////// Adding device on the JComboBox ////////////
+				devices = DAO.getDevices();
+				for (int i = 0; i < devices.size(); i++) {
+					comboBox_DevicesDBList2.addItem(devices.get(i).getDeviceName());
+				}
+				
+				/////////////////////////// Signature addition ///////////////////////////
+				// Addition of a picture
+				JLabel lblPicture2 = new JLabel();
+				ImageIcon image2 = new ImageIcon(this.getClass().getResource("/bluetoothPicture2.png"));
+				
+				Label lblBluetooth2 = new Label("Bluetooth");
+				lblBluetooth2.setFont(new Font("Arial", Font.BOLD, 54));
+				lblBluetooth2.setForeground(new Color(0, 0, 204));
+				lblBluetooth2.setBounds(114, 172, 269, 59);
+				frmBluer2.getContentPane().add(lblBluetooth2);
+				lblPicture2.setIcon(image2);
+				lblPicture2.setBounds(0, 131, 128, 140);
+				frmBluer2.getContentPane().add(lblPicture2);
+				
+				JLabel lblDeveloper2 = new JLabel("Developt by DUBUS Alexis, MATTON Maxence and GANDON Adrian.");
+				lblDeveloper2.setEnabled(false);
+				lblDeveloper2.setFont(new Font("Arial", Font.ITALIC, 10));
+				lblDeveloper2.setBounds(93, 257, 331, 14);
+				frmBluer2.getContentPane().add(lblDeveloper2);
+				
+				JLabel lblProjectBlueR2 = new JLabel("Project BlueR");
+				lblProjectBlueR2.setFont(new Font("Arial", Font.BOLD, 15));
+				lblProjectBlueR2.setEnabled(false);
+				lblProjectBlueR2.setBounds(318, 246, 106, 14);
+				frmBluer2.getContentPane().add(lblProjectBlueR2);
+				
+				/////////////////////////// Set the FRM as visible ///////////////////////////
+				frmBluer2.setVisible(true);
 			}
 		});
 	}
