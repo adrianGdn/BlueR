@@ -5,9 +5,9 @@ package com.epsi.dugama.BlueR;
  * @author Adrian Gandon
  */
 public class Device {
-	String deviceName;
-	String idBluetooth;
-	String mailAddress;
+	private String deviceName;
+	private String idBluetooth;
+	private String mailAddress;
 	
 	
 	@Override

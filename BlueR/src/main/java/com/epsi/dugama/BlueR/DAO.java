@@ -5,7 +5,6 @@ import java.util.List;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Driver;
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 
@@ -15,47 +14,6 @@ import com.mysql.jdbc.Statement;
  * @author Adrian Gandon
  */
 public class DAO {
-	
-	/**
-	 * Method that allow us to test easily the connection with the DB.
-	 */
-	public static void testCoBDD() {
-		String url = "jdbc:mysql://localhost/bluer";
-		String login = "root";
-		String mdp = "";
-		Connection cn = null;
-		Statement st = null;
-		ResultSet rs = null;
-		
-		try {
-			// Step 1 : loading the driver
-			Class.forName("com.mysql.jdbc.Driver");
-			// Step 2 : retrieval of the connection
-			cn = (Connection) DriverManager.getConnection(url, login, mdp);
-			// Step 3 : creation of a statement
-			st = (Statement) cn.createStatement();
-			String sql = "SELECT * FROM device;";
-			// Step 4 : query execution
-			rs = (ResultSet) st.executeQuery(sql);
-			// Step 5 : We travel "ResultSet"
-			while (rs.next()) {
-				System.out.println(rs.getString("deviceName"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e2) {
-			e2.printStackTrace();
-		} finally {
-			try {
-				// Step 6 : liberation of the memory
-				cn.close();
-				st.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}	
-	}
-	
 	/**
 	 * Method that allow us to get the device which was present on DB.
 	 * 
@@ -198,6 +156,53 @@ public class DAO {
 			}
 		}
 		return deviceIsDeleted;
+	}
+	
+	/**
+	 * Method that allow us to update a specific device which was present on DB.
+	 * 
+	 * @param updateDevice The specific device that you search to update on DB. This is a Device object.
+	 * @param oldIdBluetooth The old ID of the specific device that you search to update on DB. This is a String.
+	 * @return
+	 */
+	public static boolean updateOneDevice(Device updateDevice, String oldIdBluetooth) {
+		String url = "jdbc:mysql://localhost/bluer";
+		String login = "root";
+		String mdp = "";
+		Connection cn = null;
+		Statement st = null;
+		
+		boolean deviceIsUpdated = false;
+		
+		try {
+			// Step 1 : Loading the driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// Step 2 : Retrieval of the connection
+			cn = (Connection) DriverManager.getConnection(url, login, mdp);
+			// Step 3 : Creation of a statement
+			st = (Statement) cn.createStatement();
+			// Step 4 : Creation of the query
+			String sql = "UPDATE device SET `idBluetooth` = '" + updateDevice.getIdBluetooth() + "', "
+					+ "`deviceName` = '" + updateDevice.getDeviceName() + "', "
+					+ "`mailAddress` = '" + updateDevice.getMailAddress() + "' WHERE device.idBluetooth = '" + oldIdBluetooth + "';";
+			// Step 5 : Query execution
+			st.executeUpdate(sql);
+			deviceIsUpdated = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e2) {
+			e2.printStackTrace();
+		} finally {
+			try {
+				// Step 6 : Liberation of the memory
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return deviceIsUpdated;
 	}
 	
 	/**
