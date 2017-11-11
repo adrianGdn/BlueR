@@ -57,7 +57,7 @@ public class MainView {
 		frmBluer.setTitle("BlueR");
 		frmBluer.getContentPane().setForeground(Color.BLACK);
 		frmBluer.getContentPane().setFont(new Font("Arial", Font.PLAIN, 11));
-		frmBluer.setBounds(100, 100, 438, 300);
+		frmBluer.setBounds(100, 100, 438, 305);
 		frmBluer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBluer.getContentPane().setLayout(null);
 		
@@ -180,7 +180,7 @@ public class MainView {
 				frmBluer2.setTitle("BlueR - Existing Device");
 				frmBluer2.getContentPane().setForeground(Color.BLACK);
 				frmBluer2.getContentPane().setFont(new Font("Arial", Font.PLAIN, 11));
-				frmBluer2.setBounds(632, 100, 438, 300);
+				frmBluer2.setBounds(632, 100, 438, 305);
 				frmBluer2.getContentPane().setLayout(null);
 					
 				
