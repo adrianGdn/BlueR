@@ -211,36 +211,48 @@ public class DAO {
 	 * @param aDevice The device that you want to insert in the DB. This is a Device object.
 	 */
 	public static void addDevice(Device aDevice) {
-		String url = "jdbc:mysql://localhost/bluer";
-		String login = "root";
-		String mdp = "";
-		Connection cn = null;
-		Statement st = null;
-		
-		try {
-			// Step 1 : Loading the driver
-			Class.forName("com.mysql.jdbc.Driver");
-			// Step 2 : Retrieval of the connection
-			cn = (Connection) DriverManager.getConnection(url, login, mdp);
-			// Step 3 : Creation of a statement
-			st = (Statement) cn.createStatement();
-			// Step 4 : Creation of the query
-			String sql = "INSERT INTO `device` (`idBluetooth`, `deviceName`, `mailAddress`) "
-					+ "VALUES ('" + aDevice.getIdBluetooth() + "', '" + aDevice.getDeviceName() +"', '" + aDevice.getMailAddress() + "');";
-			// Step 5 : Query execution
-			st.executeUpdate(sql);
+		List<Device> devices;
+		devices = getDevices();
+		boolean foundInBDD = false;
+		for (Device device : devices) {
+			if(device.getIdBluetooth().equals(aDevice.getIdBluetooth()))
+			{
+				foundInBDD = true;
+			}
+		}
+		if(foundInBDD) //test if the device if found in the BDD
+		{
+			String url = "jdbc:mysql://localhost/bluer";
+			String login = "root";
+			String mdp = "";
+			Connection cn = null;
+			Statement st = null;
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e2) {
-			e2.printStackTrace();
-		} finally {
 			try {
-				// Step 6 : Liberation of the memory
-				cn.close();
-				st.close();
+				// Step 1 : Loading the driver
+				Class.forName("com.mysql.jdbc.Driver");
+				// Step 2 : Retrieval of the connection
+				cn = (Connection) DriverManager.getConnection(url, login, mdp);
+				// Step 3 : Creation of a statement
+				st = (Statement) cn.createStatement();
+				// Step 4 : Creation of the query
+				String sql = "INSERT INTO `device` (`idBluetooth`, `deviceName`, `mailAddress`) "
+						+ "VALUES ('" + aDevice.getIdBluetooth() + "', '" + aDevice.getDeviceName() +"', '" + aDevice.getMailAddress() + "');";
+				// Step 5 : Query execution
+				st.executeUpdate(sql);
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} catch (ClassNotFoundException e2) {
+				e2.printStackTrace();
+			} finally {
+				try {
+					// Step 6 : Liberation of the memory
+					cn.close();
+					st.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
