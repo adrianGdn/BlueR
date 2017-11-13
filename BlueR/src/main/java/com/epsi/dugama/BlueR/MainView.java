@@ -18,6 +18,7 @@ import java.awt.Window.Type;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
+import com.epsi.dugama.BlueR.bluetooth.*;
 
 public class MainView {
 	private JFrame frmBluer;
@@ -149,9 +150,13 @@ public class MainView {
 				comboBox_DevicesList.setEnabled(true);
 				// We load the device of the DB --> will change after
 				// This part had to be deleted, but was enabled to test the list
-				devices = DAO.getDevices();
+				//devices = DAO.getDevices();
+				com.epsi.dugama.BlueR.bluetooth.DeviceDiscovery.init();
+				devices = DeviceDiscovery.getDeviceDiscovered();
+				
 				for (int i = 0; i < devices.size(); i++) {
-					comboBox_DevicesList.addItem(devices.get(i).getDeviceName());
+					comboBox_DevicesList.addItem(devices.get(i).getDeviceName() + " : "+ devices.get(i).getIdBluetooth());
+					DAO.addDevice(devices.get(i));
 				}
 			}
 		});
