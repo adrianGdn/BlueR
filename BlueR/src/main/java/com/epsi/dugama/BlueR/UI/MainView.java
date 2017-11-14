@@ -156,6 +156,8 @@ public class MainView {
 				com.epsi.dugama.BlueR.bluetooth.DeviceDiscovery.init();
 				devices = DeviceDiscovery.getDeviceDiscovered();
 				
+				// Allow to reset the list and then to add device in it
+				comboBox_DevicesList.removeAllItems();
 				for (int i = 0; i < devices.size(); i++) {
 					comboBox_DevicesList.addItem(devices.get(i).getDeviceName() + " : "+ devices.get(i).getIdBluetooth());
 					DAO.addDevice(devices.get(i));
