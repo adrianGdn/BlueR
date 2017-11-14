@@ -197,7 +197,7 @@ public class MainView {
 				lblInfoCheckPresentDevice2.setBounds(10, 5, 414, 14);
 				frmBluer2.getContentPane().add(lblInfoCheckPresentDevice2);
 				
-				JComboBox<String> comboBox_DevicesDBList2 = new JComboBox<String>();
+				final JComboBox<String> comboBox_DevicesDBList2 = new JComboBox<String>();
 				comboBox_DevicesDBList2.setFont(new Font("Arial", Font.PLAIN, 11));
 				comboBox_DevicesDBList2.setEnabled(true);
 				comboBox_DevicesDBList2.setToolTipText("");
@@ -207,8 +207,45 @@ public class MainView {
 				//////////// Adding device on the JComboBox ////////////
 				devices = DAO.getDevices();
 				for (int i = 0; i < devices.size(); i++) {
-					comboBox_DevicesDBList2.addItem(devices.get(i).getDeviceName());
+					comboBox_DevicesDBList2.addItem(devices.get(i).getIdBluetooth() + " - " + devices.get(i).getDeviceName());
 				}
+				
+				JButton btnDeleteDevice = new JButton("Delete this device");
+				btnDeleteDevice.setFont(new Font("Arial", Font.PLAIN, 11));
+				btnDeleteDevice.setBounds(305, 55, 120, 23);
+				frmBluer2.getContentPane().add(btnDeleteDevice);
+				
+				/////////////////////////// Event action ///////////////////////////
+				btnDeleteDevice.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							// 12 is the size of the Bluetooth ID
+							DAO.deleteOneDevice(comboBox_DevicesDBList2.getSelectedItem().toString().substring(0, 12));
+							devices = DAO.getDevices();
+							comboBox_DevicesDBList2.removeAllItems();
+							for (int i = 0; i < devices.size(); i++) {
+								comboBox_DevicesDBList2.addItem(devices.get(i).getIdBluetooth() + " - " + devices.get(i).getDeviceName());
+							}
+							JOptionPane.showMessageDialog(null, "The device has been correctly deleted.");
+						}
+						catch (Exception deviceNotDeleted) {
+							JOptionPane.showMessageDialog(null, "The device hasn't been correctly deleted.");
+						}
+						// 12 is the size of the Bluetooth ID
+						/*boolean wasDeleted = DAO.deleteOneDevice(comboBox_DevicesDBList2.getSelectedItem().toString().substring(0, 12));
+						if (wasDeleted) {
+							devices = DAO.getDevices();
+							comboBox_DevicesDBList2.removeAllItems();
+							for (int i = 0; i < devices.size(); i++) {
+								comboBox_DevicesDBList2.addItem(devices.get(i).getIdBluetooth() + " - " + devices.get(i).getDeviceName());
+							}
+							JOptionPane.showMessageDialog(null, "The device has been correctly deleted.");
+						} 
+						else {
+							JOptionPane.showMessageDialog(null, "The device hasn't been correctly deleted.");
+						}*/
+					}
+				});
 				
 				/////////////////////////// Signature addition ///////////////////////////
 				// Addition of a picture
