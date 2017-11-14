@@ -34,6 +34,8 @@ public class DAOTest {
 		devicesWithoutDAOMethod = DAO.getDevices();
 		devicesWithoutDAOMethod.add(device);
 		DAO.addDevice(device);
+			// We check if we cannot add a "clone" 
+		DAO.addDevice(device);
 		devicesWithDAOMethod = DAO.getDevices();
 		retrieveDevice = DAO.getOneDevice(device.getIdBluetooth());
 		// Verification - Creation
@@ -54,7 +56,6 @@ public class DAOTest {
 		assertThat(device.toString(), equalTo(retrieveDevice.toString()));
 		assertThat(devicesWithoutDAOMethod.toString(), equalTo(devicesWithDAOMethod.toString()));
 		
-		
 		// Third execution - Deletion
 		DAO.deleteOneDevice(device.getIdBluetooth());
 		devicesWithDAOMethod = DAO.getDevices();
@@ -62,6 +63,5 @@ public class DAOTest {
 		// Verification - Deletion
 		assertNull(DAO.getOneDevice(device.getIdBluetooth()));
 		assertThat(devicesWithoutDAOMethod.toString(), equalTo(devicesWithDAOMethod.toString()));
-		
     }
 }

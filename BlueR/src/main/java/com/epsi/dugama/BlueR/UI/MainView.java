@@ -1,4 +1,4 @@
-package com.epsi.dugama.BlueR;
+package com.epsi.dugama.BlueR.UI;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -18,6 +18,8 @@ import java.awt.Window.Type;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
+import com.epsi.dugama.BlueR.DAO;
+import com.epsi.dugama.BlueR.Device;
 import com.epsi.dugama.BlueR.bluetooth.*;
 
 public class MainView {

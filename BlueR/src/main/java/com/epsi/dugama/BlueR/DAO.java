@@ -211,8 +211,7 @@ public class DAO {
 	 * @param aDevice The device that you want to insert in the DB. This is a Device object.
 	 */
 	public static void addDevice(Device aDevice) {
-		List<Device> devices;
-		devices = getDevices();
+		List<Device> devices = getDevices();
 		boolean foundInBDD = false;
 		for (Device device : devices) {
 			if(device.getIdBluetooth().equals(aDevice.getIdBluetooth()))
@@ -220,7 +219,8 @@ public class DAO {
 				foundInBDD = true;
 			}
 		}
-		if(foundInBDD) //test if the device if found in the BDD
+		// We check if the device is found in the DB
+		if(!foundInBDD)
 		{
 			String url = "jdbc:mysql://localhost/bluer";
 			String login = "root";
