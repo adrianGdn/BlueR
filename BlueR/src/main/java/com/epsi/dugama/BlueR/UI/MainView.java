@@ -231,19 +231,6 @@ public class MainView {
 						catch (Exception deviceNotDeleted) {
 							JOptionPane.showMessageDialog(null, "The device hasn't been correctly deleted.");
 						}
-						// 12 is the size of the Bluetooth ID
-						/*boolean wasDeleted = DAO.deleteOneDevice(comboBox_DevicesDBList2.getSelectedItem().toString().substring(0, 12));
-						if (wasDeleted) {
-							devices = DAO.getDevices();
-							comboBox_DevicesDBList2.removeAllItems();
-							for (int i = 0; i < devices.size(); i++) {
-								comboBox_DevicesDBList2.addItem(devices.get(i).getIdBluetooth() + " - " + devices.get(i).getDeviceName());
-							}
-							JOptionPane.showMessageDialog(null, "The device has been correctly deleted.");
-						} 
-						else {
-							JOptionPane.showMessageDialog(null, "The device hasn't been correctly deleted.");
-						}*/
 					}
 				});
 				
