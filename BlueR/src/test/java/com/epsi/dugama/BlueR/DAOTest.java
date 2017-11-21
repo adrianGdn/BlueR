@@ -23,7 +23,7 @@ public class DAOTest {
     {
 		// Preparation
 			// We should have the same behavior for a devices list created here and with the DAO method
-		Device device = new Device("Test Man Phone", "NUM23BER", "test.man@gmail.com");
+		Device device = new Device("Test Man Phone", "NUM23BER");
 		Device retrieveDevice;
 		String oldBlutoothID = device.getIdBluetooth();
 		List<Device> devicesWithoutDAOMethod;
@@ -47,7 +47,6 @@ public class DAOTest {
 		devicesWithoutDAOMethod.remove(device);
 		device.setDeviceName("The phone of the testing man");
 		device.setIdBluetooth("THE NUMBER 23");
-		device.setMailAddress("testman@gmail.com");
 		devicesWithoutDAOMethod.add(device);		
 		DAO.updateOneDevice(device, oldBlutoothID);
 		devicesWithDAOMethod = DAO.getDevices();
