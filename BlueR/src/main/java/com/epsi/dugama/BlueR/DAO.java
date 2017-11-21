@@ -42,7 +42,7 @@ public class DAO {
 			rs = (ResultSet) st.executeQuery(sql);
 			// Step 5 : We travel "ResultSet"
 			while (rs.next()) {
-				aDevice = new Device(rs.getString("deviceName"), rs.getString("idBluetooth"), rs.getString("mailAddress"));
+				aDevice = new Device(rs.getString("deviceName"), rs.getString("idBluetooth"));
 				devices.add(aDevice);
 			}
 		} catch (SQLException e) {
@@ -90,7 +90,7 @@ public class DAO {
 			rs = (ResultSet) st.executeQuery(sql);
 			// Step 5 : We travel "ResultSet" in order to find the searched value
 			while (rs.next() && deviceFound == false) {
-				aDevice = new Device(rs.getString("deviceName"), rs.getString("idBluetooth"), rs.getString("mailAddress"));
+				aDevice = new Device(rs.getString("deviceName"), rs.getString("idBluetooth"));
 				if (aDevice.getIdBluetooth().equals(idBluetoothOfTheSearchedDevice)) {
 					deviceFound = true;
 				}
@@ -183,8 +183,8 @@ public class DAO {
 			st = (Statement) cn.createStatement();
 			// Step 4 : Creation of the query
 			String sql = "UPDATE device SET `idBluetooth` = '" + updateDevice.getIdBluetooth() + "', "
-					+ "`deviceName` = '" + updateDevice.getDeviceName() + "', "
-					+ "`mailAddress` = '" + updateDevice.getMailAddress() + "' WHERE device.idBluetooth = '" + oldIdBluetooth + "';";
+					+ "`deviceName` = '" + updateDevice.getDeviceName() + "'"
+					+ " WHERE device.idBluetooth = '" + oldIdBluetooth + "';";
 			// Step 5 : Query execution
 			st.executeUpdate(sql);
 			deviceIsUpdated = true;
@@ -211,36 +211,48 @@ public class DAO {
 	 * @param aDevice The device that you want to insert in the DB. This is a Device object.
 	 */
 	public static void addDevice(Device aDevice) {
-		String url = "jdbc:mysql://localhost/bluer";
-		String login = "root";
-		String mdp = "";
-		Connection cn = null;
-		Statement st = null;
-		
-		try {
-			// Step 1 : Loading the driver
-			Class.forName("com.mysql.jdbc.Driver");
-			// Step 2 : Retrieval of the connection
-			cn = (Connection) DriverManager.getConnection(url, login, mdp);
-			// Step 3 : Creation of a statement
-			st = (Statement) cn.createStatement();
-			// Step 4 : Creation of the query
-			String sql = "INSERT INTO `device` (`idBluetooth`, `deviceName`, `mailAddress`) "
-					+ "VALUES ('" + aDevice.getIdBluetooth() + "', '" + aDevice.getDeviceName() +"', '" + aDevice.getMailAddress() + "');";
-			// Step 5 : Query execution
-			st.executeUpdate(sql);
+		List<Device> devices = getDevices();
+		boolean foundInBDD = false;
+		for (Device device : devices) {
+			if(device.getIdBluetooth().equals(aDevice.getIdBluetooth()))
+			{
+				foundInBDD = true;
+			}
+		}
+		// We check if the device is found in the DB
+		if(!foundInBDD)
+		{
+			String url = "jdbc:mysql://localhost/bluer";
+			String login = "root";
+			String mdp = "";
+			Connection cn = null;
+			Statement st = null;
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e2) {
-			e2.printStackTrace();
-		} finally {
 			try {
-				// Step 6 : Liberation of the memory
-				cn.close();
-				st.close();
+				// Step 1 : Loading the driver
+				Class.forName("com.mysql.jdbc.Driver");
+				// Step 2 : Retrieval of the connection
+				cn = (Connection) DriverManager.getConnection(url, login, mdp);
+				// Step 3 : Creation of a statement
+				st = (Statement) cn.createStatement();
+				// Step 4 : Creation of the query
+				String sql = "INSERT INTO `device` (`idBluetooth`, `deviceName`) "
+						+ "VALUES ('" + aDevice.getIdBluetooth() + "', '" + aDevice.getDeviceName() + "');";
+				// Step 5 : Query execution
+				st.executeUpdate(sql);
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} catch (ClassNotFoundException e2) {
+				e2.printStackTrace();
+			} finally {
+				try {
+					// Step 6 : Liberation of the memory
+					cn.close();
+					st.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

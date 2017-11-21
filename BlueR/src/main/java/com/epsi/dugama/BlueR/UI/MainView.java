@@ -1,4 +1,4 @@
-package com.epsi.dugama.BlueR;
+package com.epsi.dugama.BlueR.UI;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -18,6 +18,9 @@ import java.awt.Window.Type;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
+import com.epsi.dugama.BlueR.DAO;
+import com.epsi.dugama.BlueR.Device;
+import com.epsi.dugama.BlueR.bluetooth.*;
 
 public class MainView {
 	private JFrame frmBluer;
@@ -149,9 +152,15 @@ public class MainView {
 				comboBox_DevicesList.setEnabled(true);
 				// We load the device of the DB --> will change after
 				// This part had to be deleted, but was enabled to test the list
-				devices = DAO.getDevices();
+				//devices = DAO.getDevices();
+				com.epsi.dugama.BlueR.bluetooth.DeviceDiscovery.init();
+				devices = DeviceDiscovery.getDeviceDiscovered();
+				
+				// Allow to reset the list and then to add device in it
+				comboBox_DevicesList.removeAllItems();
 				for (int i = 0; i < devices.size(); i++) {
-					comboBox_DevicesList.addItem(devices.get(i).getDeviceName());
+					comboBox_DevicesList.addItem(devices.get(i).getDeviceName() + " : "+ devices.get(i).getIdBluetooth());
+					DAO.addDevice(devices.get(i));
 				}
 			}
 		});
@@ -190,7 +199,7 @@ public class MainView {
 				lblInfoCheckPresentDevice2.setBounds(10, 5, 414, 14);
 				frmBluer2.getContentPane().add(lblInfoCheckPresentDevice2);
 				
-				JComboBox<String> comboBox_DevicesDBList2 = new JComboBox<String>();
+				final JComboBox<String> comboBox_DevicesDBList2 = new JComboBox<String>();
 				comboBox_DevicesDBList2.setFont(new Font("Arial", Font.PLAIN, 11));
 				comboBox_DevicesDBList2.setEnabled(true);
 				comboBox_DevicesDBList2.setToolTipText("");
@@ -200,8 +209,32 @@ public class MainView {
 				//////////// Adding device on the JComboBox ////////////
 				devices = DAO.getDevices();
 				for (int i = 0; i < devices.size(); i++) {
-					comboBox_DevicesDBList2.addItem(devices.get(i).getDeviceName());
+					comboBox_DevicesDBList2.addItem(devices.get(i).getIdBluetooth() + " - " + devices.get(i).getDeviceName());
 				}
+				
+				JButton btnDeleteDevice = new JButton("Delete this device");
+				btnDeleteDevice.setFont(new Font("Arial", Font.PLAIN, 11));
+				btnDeleteDevice.setBounds(305, 55, 120, 23);
+				frmBluer2.getContentPane().add(btnDeleteDevice);
+				
+				/////////////////////////// Event action ///////////////////////////
+				btnDeleteDevice.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							// 12 is the size of the Bluetooth ID
+							DAO.deleteOneDevice(comboBox_DevicesDBList2.getSelectedItem().toString().substring(0, 12));
+							devices = DAO.getDevices();
+							comboBox_DevicesDBList2.removeAllItems();
+							for (int i = 0; i < devices.size(); i++) {
+								comboBox_DevicesDBList2.addItem(devices.get(i).getIdBluetooth() + " - " + devices.get(i).getDeviceName());
+							}
+							JOptionPane.showMessageDialog(null, "The device has been correctly deleted.");
+						}
+						catch (Exception deviceNotDeleted) {
+							JOptionPane.showMessageDialog(null, "The device hasn't been correctly deleted.");
+						}
+					}
+				});
 				
 				/////////////////////////// Signature addition ///////////////////////////
 				// Addition of a picture

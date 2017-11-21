@@ -18,16 +18,24 @@ import javax.obex.ResponseCodes;
 
 import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.DataElement;
+import com.epsi.dugama.BlueR.Device;
 
 import com.intel.bluetooth.RemoteDeviceHelper;
 
 public class DeviceDiscovery implements DiscoveryListener {
 
-	public static final ArrayList<RemoteDevice> devicesDiscovered = new ArrayList<RemoteDevice>();
+	public static final ArrayList<RemoteDevice> bluetoothDevicesDiscovered = new ArrayList<RemoteDevice>();
+	public static final ArrayList<Device> devicesDiscovered = new ArrayList<Device>();
 
 	private static Object lock = new Object();
 
 	public static void main(String[] args) {
+		init();
+	}
+	
+	
+	public static void init()
+	{
 		try {
 			// 1
 			LocalDevice localDevice = LocalDevice.getLocalDevice();
@@ -53,25 +61,27 @@ public class DeviceDiscovery implements DiscoveryListener {
 			e.printStackTrace();
 		}
 	}
+	
+	public static ArrayList<Device> getDeviceDiscovered()
+	{
+		return devicesDiscovered;
+	}
 
 	public void deviceDiscovered(RemoteDevice btDevice, DeviceClass arg1) {
 
 		String name;
 		try {
 			name = btDevice.getFriendlyName(false);
+			devicesDiscovered.add(new Device(name, btDevice.getBluetoothAddress()));
+			bluetoothDevicesDiscovered.add(btDevice);
+			System.out.println("device found: " + name + "");
 		} catch (Exception e) {
 			name = btDevice.getBluetoothAddress();
-		}
-		int rssi = 0;
-		try {
-			System.out.println( btDevice);
-			rssi = RemoteDeviceHelper.readRSSI(btDevice); //risque de donner une exception
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		System.out.println("device found: " + name + " rssi " + rssi);
+		//rssi = RemoteDeviceHelper.readRSSI(btDevice); //risque de donner une exception
+		//System.out.println("device found: " + name + " rssi " + rssi);
 	}
 
 	public void inquiryCompleted(int arg0) {
@@ -160,7 +170,7 @@ public class DeviceDiscovery implements DiscoveryListener {
 			// System.out.println("Appareil : " + btDevice.getFriendlyName(true) + " ID: " +
 			// btDevice.getBluetoothAddress() );
 			// System.out.println("Appareil : "+ btDevice.get) );
-			devicesDiscovered.add(btDevice);
+			bluetoothDevicesDiscovered.add(btDevice);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
