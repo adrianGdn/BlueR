@@ -9,7 +9,7 @@ public class User {
 	private String secondName;
 	private String mailAddress;
 	private String nbMobile;
-	private String idBluetoothDevice;
+	private Device aDevice;
 	
 	/**
 	 * Allow you to create a User object.
@@ -18,14 +18,27 @@ public class User {
 	 * @param secondName The second name of the user. This is a string.
 	 * @param mailAddress The mail address of the user. This is a string.
 	 * @param nbMobile This mobile number of the user. This is a string.
-	 * @param idBluetoothDevice The ID Bluetooth of the device of this user. This is a string.
+	 * @param aDevice The device of this user. This is a Device object.
 	 */
-	public User(String firstName, String secondName, String mailAddress, String nbMobile, String idBluetoothDevice) {
+	public User(String firstName, String secondName, String mailAddress, String nbMobile, Device aDevice) {
 		this.setFirstName(firstName);
 		this.setSecondName(secondName);
 		this.setMailAddress(mailAddress);
 		this.setNbMobile(nbMobile);
-		this.setIdBluetoothDevice(idBluetoothDevice);
+		this.setDevice(aDevice);
+	}
+	
+	/**
+	 * Allow you to create a User object without mail address and mobile number set.
+	 * 
+	 * @param firstName The first name of the user. This is a string.
+	 * @param secondName The second name of the user. This is a string.
+	 * @param aDevice The device of this user. This is a Device object.
+	 */
+	public User(String firstName, String secondName, Device aDevice) {
+		this.setFirstName(firstName);
+		this.setSecondName(secondName);
+		this.setDevice(aDevice);
 	}
 	
 	
@@ -62,12 +75,12 @@ public class User {
 		return this.nbMobile;
 	}
 	/**
-	 * Allow you to get the Bluetooth ID of the device of that user.
+	 * Allow you to get the device of that user.
 	 * 
-	 * @return The ID Bluetooth of the device of this user. This is a string.
+	 * @return The device of this user. This is a Device object.
 	 */
-	public String getIdBluetoothDevice() {
-		return this.idBluetoothDevice;
+	public Device getDevice() {
+		return this.aDevice;
 	}
 	
 	
@@ -104,11 +117,18 @@ public class User {
 		this.nbMobile = nbMobile;
 	}
 	/**
-	 * Allow you to set the Bluetooth ID of the device of that user.
+	 * Allow you to set the device of that user.
 	 * 
-	 * @param idBluetoothDevice The ID Bluetooth of the device of this user. This is a string.
+	 * @param aDevice The device of this user. This is a Device object.
 	 */
-	public void setIdBluetoothDevice(String idBluetoothDevice) {
-		this.idBluetoothDevice = idBluetoothDevice;
+	public void setDevice(Device aDevice) {
+		this.aDevice = aDevice;
 	}
+	
+	@Override
+	public String toString() {
+		return "Cet utilisateur se nomme : " + this.getSecondName() + " " + this.getFirstName() 
+				+ " et le nom de son appareil est : " + this.getDevice().getDeviceName() + ".";
+	}
+	
 }
