@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `firstName` char(20) NOT NULL,
   `secondName` char(20) NOT NULL,
   `idBluetooth` char(50) NOT NULL,
-  `mailAddress` char(30),
+  `mailAddress` char(50),
   `nbMobile` char(30),
   PRIMARY KEY (`firstName`),
   CONSTRAINT fk_user FOREIGN KEY(idBluetooth) REFERENCES Device(idBluetooth)

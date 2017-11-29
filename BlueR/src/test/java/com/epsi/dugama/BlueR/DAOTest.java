@@ -83,7 +83,7 @@ public class DAOTest {
 		// Preparation
 			// We should have the same behavior for a users list created here and with the DAO method
 		Device device = new Device("Test Man Phone User", "NUM23BERUSER");
-		User aUser = new User("N1stName", "N2ndName", device, "name.2ndName@gmail.com", "0623232323");
+		User aUser = new User("ZN1stName", "ZN2ndName", device, "zname.2ndName@gmail.com", "0623232323");
 		User retrieveUser;
 		String oldBluetoothID = device.getIdBluetooth();
 		String oldFirstName = aUser.getFirstName();
@@ -111,9 +111,9 @@ public class DAOTest {
 		device.setDeviceName("The user phone of the testing man");
 		device.setIdBluetooth("THE USER NUMBER 23");
 		aUser.setDevice(device);
-		aUser.setFirstName("RealFirstName");
-		aUser.setSecondName("Real Second Name");
-		aUser.setMailAddress("realname.real2ndName@gmail.com");
+		aUser.setFirstName("ZRealFirstName");
+		aUser.setSecondName("ZReal Second Name");
+		aUser.setMailAddress("zrealname.real2ndName@gmail.com");
 		aUser.setNbMobile("0632323232");
 		usersWithoutDAOMethod.add(aUser);
 		DAO.addDevice(device);
