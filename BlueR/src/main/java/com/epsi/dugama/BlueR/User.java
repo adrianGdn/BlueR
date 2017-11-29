@@ -20,7 +20,7 @@ public class User {
 	 * @param nbMobile This mobile number of the user. This is a string.
 	 * @param aDevice The device of this user. This is a Device object.
 	 */
-	public User(String firstName, String secondName, String mailAddress, String nbMobile, Device aDevice) {
+	public User(String firstName, String secondName, Device aDevice, String mailAddress, String nbMobile) {
 		this.setFirstName(firstName);
 		this.setSecondName(secondName);
 		this.setMailAddress(mailAddress);

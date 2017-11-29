@@ -12,7 +12,7 @@ public class UserTest {
 	public void userSimpleGettersTest() {
 		// Preparation
 		Device device1 = new Device("Device name", "Bluetooth id");
-		User user1 = new User("Name", "2ndName", "name.2ndName@gmail.com", "0623232323", device1);
+		User user1 = new User("Name", "2ndName", device1, "name.2ndName@gmail.com", "0623232323");
 		User user2 = new User("Name", "2ndName", device1);
 		// Begin
 			// Gets tests

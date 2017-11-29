@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `device` (
 
 CREATE TABLE IF NOT EXISTS `user` (
   `firstName` char(20) NOT NULL,
-  `secondName` char(20),
+  `secondName` char(20) NOT NULL,
   `idBluetooth` char(50) NOT NULL,
   `mailAddress` char(30),
   `nbMobile` char(30),
