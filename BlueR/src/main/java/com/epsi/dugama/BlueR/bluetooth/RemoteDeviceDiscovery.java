@@ -30,14 +30,6 @@ public class RemoteDeviceDiscovery {
 				} catch (IOException cantGetDeviceName) {
 					cantGetDeviceName.printStackTrace();
 				}
-				try {
-					rssi = RemoteDeviceHelper.readRSSI(btDevice); //risque de donner une exception
-
-					System.out.println(rssi);
-					
-				} catch (IOException cantGetRssi) {
-					cantGetRssi.printStackTrace();
-				}
 			}
 
             public void inquiryCompleted(int discType) {
