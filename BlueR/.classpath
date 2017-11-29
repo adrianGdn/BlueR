@@ -27,7 +27,7 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.0.5.jar"/>
 	<classpathentry kind="lib" path="lib/bluecove-2.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/bluecove-bluez-2.1.1.jar"/>
-	<classpathentry kind="lib" path="D:/EPSI/B3/Dev/Java/BlueR/BlueR/lib/activation.jar"/>
-	<classpathentry kind="lib" path="D:/EPSI/B3/Dev/Java/BlueR/BlueR/lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/activation.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
