@@ -20,6 +20,8 @@ import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
 import com.epsi.dugama.BlueR.DAO;
 import com.epsi.dugama.BlueR.Device;
+import com.epsi.dugama.BlueR.SendMailTLS;
+import com.epsi.dugama.BlueR.User;
 import com.epsi.dugama.BlueR.bluetooth.*;
 
 public class MainView {
@@ -150,8 +152,6 @@ public class MainView {
 			public void actionPerformed(ActionEvent arg0) {
 				/////////////////////////////// Action for the "Check present device" here ///////////////////////////////
 				comboBox_DevicesList.setEnabled(true);
-				// We load the device of the DB --> will change after
-				// This part had to be deleted, but was enabled to test the list
 				//devices = DAO.getDevices();
 				com.epsi.dugama.BlueR.bluetooth.DeviceDiscovery.init();
 				devices = DeviceDiscovery.getDeviceDiscovered();
@@ -159,7 +159,7 @@ public class MainView {
 				// Allow to reset the list and then to add device in it
 				comboBox_DevicesList.removeAllItems();
 				for (int i = 0; i < devices.size(); i++) {
-					comboBox_DevicesList.addItem(devices.get(i).getDeviceName() + " : "+ devices.get(i).getIdBluetooth());
+					comboBox_DevicesList.addItem( devices.get(i).getIdBluetooth() + " " + devices.get(i).getDeviceName());
 					DAO.addDevice(devices.get(i));
 				}
 			}
@@ -174,7 +174,16 @@ public class MainView {
 		btnSendData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/////////////////////////////// Action for the "Send data" here ///////////////////////////////
-				JOptionPane.showMessageDialog(null, "The data has been correctly send.\nThanks for have use BlueR app.");
+				String bluetoothId = comboBox_DevicesList.getSelectedItem().toString().substring(0, 12);
+				User selectedUser = DAO.getTheUserLinkedToTheDevice(bluetoothId);
+				if(SendMailTLS.sendMail(selectedUser.getMailAddress())) //if the mail has been correctly send
+				{
+					JOptionPane.showMessageDialog(null, "The data has been correctly send.\nThanks for using BlueR app.");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "An error append, please retry.\nThanks for using BlueR app.");
+				}
 			}
 		});
 		btnSeeDBRegisteredDevice.addActionListener(new ActionListener() {

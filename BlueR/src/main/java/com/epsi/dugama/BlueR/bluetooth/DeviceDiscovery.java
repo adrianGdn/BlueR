@@ -72,7 +72,7 @@ public class DeviceDiscovery implements DiscoveryListener {
 			}
 			
 			
-
+			
 			for(RemoteDevice device : listener.bluetoothDevicesDiscovered) {
 				agent.searchServices(attrIDs, searchUuidSet, device, listener); 
 				try {
