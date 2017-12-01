@@ -518,4 +518,61 @@ public class DAO {
 			}
 		}
 	}
+
+	
+	/**
+	 * Method that allow us to get a specific user that is linked to a device which was present on DB.
+	 * 
+	 * @param idBluetoothOfTheDeviceLinkedToTheUser The ID of the specific device search on DB that is linked to a user. This is a String.
+	 * @return User The user linked to this device or null if the device has no user linked. This is a User class object.
+	 */
+	public static User getTheUserLinkedToTheDevice(String idBluetoothOfTheDeviceLinkedToTheUser) {
+		Connection cn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		
+		User aUser = null;
+		boolean userFound = false;
+		
+		try {
+			// Step 1 : Loading the driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// Step 2 : Retrieval of the connection
+			cn = (Connection) DriverManager.getConnection(url, login, mdp);
+			// Step 3 : Creation of a statement
+			st = (Statement) cn.createStatement();
+			String sql = "SELECT * FROM user;";
+			// Step 4 : Query execution
+			rs = (ResultSet) st.executeQuery(sql);
+			// Step 5 : We travel "ResultSet" in order to find the searched value
+			while (rs.next() && userFound == false) {
+				aUser = new User(rs.getString("firstName"), rs.getString("secondName"), DAO.getOneDevice(rs.getString("idBluetooth")));
+				if(!rs.getString("mailAddress").equals(null)) {
+					aUser.setMailAddress(rs.getString("mailAddress"));
+				}
+				if(!rs.getString("nbMobile").equals(null)) {
+					aUser.setNbMobile(rs.getString("nbMobile"));
+				}
+				if (aUser.getDevice().getIdBluetooth().equals(idBluetoothOfTheDeviceLinkedToTheUser)) {
+					userFound = true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e2) {
+			e2.printStackTrace();
+		} finally {
+			try {
+				// Step 6 : Liberation of the memory
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		// We return a null value if we don't find the searched value
+		if (userFound == true) {
+			return aUser;	
+		} else return null;
+	}
 }

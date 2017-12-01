@@ -61,8 +61,6 @@ public class DAOTest {
 		// Verification - Deletion
 		assertNull(DAO.getOneDevice(device.getIdBluetooth()));
 		assertThat(devicesWithoutDAOMethod.toString(), equalTo(devicesWithDAOMethod.toString()));
-		
-		daoUserTest();
     }
 	
 	/**
@@ -128,5 +126,41 @@ public class DAOTest {
 		// Verification - Deletion
 		assertNull(DAO.getOneUser(aUser.getFirstName(), aUser.getSecondName()));
 		assertThat(usersWithoutDAOMethod.toString(), equalTo(usersWithDAOMethod.toString()));
+    }
+	
+	/**
+	 * Test that check if the DAO method which allow us to get the user linked to a device.
+	 * 
+	 * Prerequisite :
+	 * - Launch your WAMP or XAMPP,
+	 * - Check if the DB is correctly configured and installed.
+	 */
+	@Test
+    public void daoGetUserLinkedToDeviceTest()
+    {
+		// Preparation
+		List<Device> devices = DAO.getDevices();
+		List<User> users =  DAO.getUsers();
+		Device device = devices.get(0);
+		User aUser = null;
+		User retrieveUser = null;
+		User voidUser = null;
+		
+		boolean userFound = false;
+		int counter = 0;
+		
+		// Execution
+		while(counter < users.size() && userFound == false) {
+			aUser = users.get(counter);
+			if(aUser.getDevice().getIdBluetooth().equals(device.getIdBluetooth())) {
+				userFound = true;
+			}
+		}
+		retrieveUser = DAO.getTheUserLinkedToTheDevice(device.getIdBluetooth());
+		voidUser = DAO.getTheUserLinkedToTheDevice("unexistant");
+		
+		// Verification
+		assertThat(aUser.toString(), equalTo(retrieveUser.toString()));
+		assertNull(voidUser);
     }
 }
