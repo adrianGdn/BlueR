@@ -606,15 +606,15 @@ public class MainView {
 									boolean txtIdBluetoothCorrect = true;
 									
 									if(txt_CreateUserFirstName.getText().equals("First name") || txt_CreateUserFirstName.getText().contains("'") 
-											|| txt_CreateUserFirstName.getText().contains(" ")) {
+											|| txt_CreateUserFirstName.getText().equals("") || txt_CreateUserFirstName.getText().contains(" ")) {
 										txtFirstNameCorrect = false;
 									}
 									if(txt_CreateUserSecondName.getText().equals("Second name") || txt_CreateUserSecondName.getText().contains("'")
-											|| txt_CreateUserSecondName.getText().contains(" ")) {
+											|| txt_CreateUserSecondName.getText().equals("") || txt_CreateUserSecondName.getText().contains(" ")) {
 										txtSecondNameCorrect = false;
 									}
 									if(txt_CreateUserMailAddress.getText().equals("mail.address@exemple.com") || txt_CreateUserMailAddress.getText().contains("'")
-											|| txt_CreateUserMailAddress.getText().contains(" ")) {
+											|| txt_CreateUserMailAddress.getText().equals("") || txt_CreateUserMailAddress.getText().contains(" ")) {
 										txtMailAddressCorrect = false;
 									}
 									if(!mailType.equals("@gmail.com") && !mailType.equals("@gmail.fr") && !mailType.equals("@me.com") && !mailType.equals("@icloud.com")
@@ -622,7 +622,7 @@ public class MainView {
 										txtMailAddressCorrect = false;
 									}
 									if(txt_CreateUserPhoneNumber.getText().equals("Phone num.") || txt_CreateUserMailAddress.getText().contains("'")
-											|| txt_CreateUserPhoneNumber.getText().contains(" ")) {
+											|| txt_CreateUserPhoneNumber.getText().equals("") || txt_CreateUserPhoneNumber.getText().contains(" ")) {
 										txtMobileNumberCorrect = false;
 									}
 									
