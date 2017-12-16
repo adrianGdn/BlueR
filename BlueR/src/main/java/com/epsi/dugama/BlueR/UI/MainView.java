@@ -186,14 +186,11 @@ public class MainView {
 				/////////////////////////////// Action for the "Send data" here ///////////////////////////////
 				String bluetoothId = comboBox_DevicesList.getSelectedItem().toString().substring(0, 12);
 				User selectedUser = DAO.getTheUserLinkedToTheDevice(bluetoothId);
-				if(SendMailTLS.sendMail(selectedUser.getMailAddress())) //if the mail has been correctly send
+				if(!selectedUser.getMailAddress().equals(null))
 				{
+					SendMailTLS.sendMail(selectedUser.getMailAddress());
 					JOptionPane.showMessageDialog(null, "The data has been correctly send.\nThanks for using BlueR app.", "Information", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "An error append, please retry.\nThanks for using BlueR app.", "Error", JOptionPane.ERROR_MESSAGE);
-				}
+				} else JOptionPane.showMessageDialog(null, "Actually, this detected device has no user registered with it.\nPlease register a user and a valid mail address for that user before trying to send data.", "Error", JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		btnSeeDBRegisteredDevice.addActionListener(new ActionListener() {
