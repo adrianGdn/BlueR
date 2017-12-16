@@ -635,15 +635,30 @@ public class MainView {
 											// We update the user
 											User createdUser = new User(txt_CreateUserFirstName.getText(), txt_CreateUserSecondName.getText(), 
 											DAO.getOneDevice(comboBox_CreateUserDevicesList.getSelectedItem().toString()), txt_CreateUserMailAddress.getText(), txt_CreateUserPhoneNumber.getText());
-											DAO.addUser(createdUser);
-											// We get the updated users list
-											users = DAO.getUsers();
-											// We clean the users list
-											comboBox_UserDBList.removeAllItems();
-											for (int i = 0; i < users.size(); i++) {
-												comboBox_UserDBList.addItem(users.get(i).getFirstName() + " " + users.get(i).getSecondName() + " - " + users.get(i).getMailAddress());
+											
+											// We check if the user that we try to add is not present in the DB
+											List<User> usersCheckList = DAO.getUsers();
+											boolean userFounds = false;
+											int userCounter = 0;
+											while(!userFounds && userCounter < usersCheckList.size()) {
+												if(usersCheckList.get(userCounter).getFirstName().equals(txt_CreateUserFirstName.getText()) || usersCheckList.get(userCounter).getSecondName().equals(txt_CreateUserSecondName.getText())) {
+													userFounds = true;
+												}												
+												userCounter++;
 											}
-											JOptionPane.showMessageDialog(null, "The user has been correctly created.", "Information", JOptionPane.INFORMATION_MESSAGE);
+											
+											// If the user was not present in the DB, we can add it
+											if(!userFounds) {
+												DAO.addUser(createdUser);
+												// We get the updated users list
+												users = DAO.getUsers();
+												// We clean the users list
+												comboBox_UserDBList.removeAllItems();
+												for (int i = 0; i < users.size(); i++) {
+													comboBox_UserDBList.addItem(users.get(i).getFirstName() + " " + users.get(i).getSecondName() + " - " + users.get(i).getMailAddress());
+												}
+												JOptionPane.showMessageDialog(null, "The user has been correctly created.", "Information", JOptionPane.INFORMATION_MESSAGE);
+											} else JOptionPane.showMessageDialog(null, "You cannot add a user that exist already.", "Warning", JOptionPane.WARNING_MESSAGE);
 										} else JOptionPane.showMessageDialog(null, "The user hasn't been created has choosen.", "Information", JOptionPane.INFORMATION_MESSAGE);
 										// We delete the label of the interface
 										txt_CreateUserFirstName.setVisible(false);
