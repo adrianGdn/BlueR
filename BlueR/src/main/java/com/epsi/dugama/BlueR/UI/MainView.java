@@ -520,20 +520,21 @@ public class MainView {
 											for (int i = 0; i < users.size(); i++) {
 												comboBox_UserDBList.addItem(users.get(i).getFirstName() + " " + users.get(i).getSecondName() + " - " + users.get(i).getMailAddress());
 											}
-											txt_UpdateUserFirstName.setVisible(false);
-											txt_UpdateUserSecondName.setVisible(false);
-											txt_UpdateUserMailAddress.setVisible(false);
-											txt_UpdateUserPhoneNumber.setVisible(false);
-											comboBox_UpdateUserDevicesList.setVisible(false);
-											btnUpdateOnDB.setVisible(false);
-											frmBluer3.getContentPane().remove(txt_UpdateUserFirstName);
-											frmBluer3.getContentPane().remove(txt_UpdateUserSecondName);
-											frmBluer3.getContentPane().remove(txt_UpdateUserMailAddress);
-											frmBluer3.getContentPane().remove(txt_UpdateUserPhoneNumber);
-											frmBluer3.getContentPane().remove(comboBox_UpdateUserDevicesList);
-											frmBluer3.getContentPane().remove(btnUpdateOnDB);
 											JOptionPane.showMessageDialog(null, "The user has been correctly updated.", "Information", JOptionPane.INFORMATION_MESSAGE);
 										} else JOptionPane.showMessageDialog(null, "The user hasn't been updated has choosen.", "Information", JOptionPane.INFORMATION_MESSAGE);
+										// We delete the label of the interface
+										txt_UpdateUserFirstName.setVisible(false);
+										txt_UpdateUserSecondName.setVisible(false);
+										txt_UpdateUserMailAddress.setVisible(false);
+										txt_UpdateUserPhoneNumber.setVisible(false);
+										comboBox_UpdateUserDevicesList.setVisible(false);
+										btnUpdateOnDB.setVisible(false);
+										frmBluer3.getContentPane().remove(txt_UpdateUserFirstName);
+										frmBluer3.getContentPane().remove(txt_UpdateUserSecondName);
+										frmBluer3.getContentPane().remove(txt_UpdateUserMailAddress);
+										frmBluer3.getContentPane().remove(txt_UpdateUserPhoneNumber);
+										frmBluer3.getContentPane().remove(comboBox_UpdateUserDevicesList);
+										frmBluer3.getContentPane().remove(btnUpdateOnDB);
 									} else JOptionPane.showMessageDialog(null, "One of the updated fields have wrong values.", "Warning", JOptionPane.WARNING_MESSAGE);
 								}
 								catch (Exception userNotDeleted) {
@@ -642,20 +643,21 @@ public class MainView {
 											for (int i = 0; i < users.size(); i++) {
 												comboBox_UserDBList.addItem(users.get(i).getFirstName() + " " + users.get(i).getSecondName() + " - " + users.get(i).getMailAddress());
 											}
-											txt_CreateUserFirstName.setVisible(false);
-											txt_CreateUserSecondName.setVisible(false);
-											txt_CreateUserMailAddress.setVisible(false);
-											txt_CreateUserPhoneNumber.setVisible(false);
-											comboBox_CreateUserDevicesList.setVisible(false);
-											btnCreateOnDB.setVisible(false);
-											frmBluer3.getContentPane().remove(txt_CreateUserFirstName);
-											frmBluer3.getContentPane().remove(txt_CreateUserSecondName);
-											frmBluer3.getContentPane().remove(txt_CreateUserMailAddress);
-											frmBluer3.getContentPane().remove(txt_CreateUserPhoneNumber);
-											frmBluer3.getContentPane().remove(comboBox_CreateUserDevicesList);
-											frmBluer3.getContentPane().remove(btnCreateOnDB);
 											JOptionPane.showMessageDialog(null, "The user has been correctly created.", "Information", JOptionPane.INFORMATION_MESSAGE);
 										} else JOptionPane.showMessageDialog(null, "The user hasn't been created has choosen.", "Information", JOptionPane.INFORMATION_MESSAGE);
+										// We delete the label of the interface
+										txt_CreateUserFirstName.setVisible(false);
+										txt_CreateUserSecondName.setVisible(false);
+										txt_CreateUserMailAddress.setVisible(false);
+										txt_CreateUserPhoneNumber.setVisible(false);
+										comboBox_CreateUserDevicesList.setVisible(false);
+										btnCreateOnDB.setVisible(false);
+										frmBluer3.getContentPane().remove(txt_CreateUserFirstName);
+										frmBluer3.getContentPane().remove(txt_CreateUserSecondName);
+										frmBluer3.getContentPane().remove(txt_CreateUserMailAddress);
+										frmBluer3.getContentPane().remove(txt_CreateUserPhoneNumber);
+										frmBluer3.getContentPane().remove(comboBox_CreateUserDevicesList);
+										frmBluer3.getContentPane().remove(btnCreateOnDB);
 									} else JOptionPane.showMessageDialog(null, "One of the fields have wrong values.", "Warning", JOptionPane.WARNING_MESSAGE);
 								}
 								catch (Exception userNotDeleted) {
