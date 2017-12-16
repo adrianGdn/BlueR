@@ -279,7 +279,9 @@ public class MainView {
 						try {
 							// Data request
 							String updateDeviceName = JOptionPane.showInputDialog(null, "Please enter the new device name :", "Update request", JOptionPane.QUESTION_MESSAGE);
-							if (!updateDeviceName.equals(null) && !updateDeviceName.equals("") && !updateDeviceName.contains("'")) {
+							if (!updateDeviceName.equals(null) && !updateDeviceName.equals("") && !updateDeviceName.contains("'")
+									 && !updateDeviceName.contains("!") && !updateDeviceName.contains("?") && !updateDeviceName.contains("&")
+									 && !updateDeviceName.contains("/") && !updateDeviceName.contains("(") && !updateDeviceName.contains(")") && !updateDeviceName.contains("`")) {
 								// Device update - 12 is the size of the Bluetooth ID
 								Device updateDevice = DAO.getOneDevice(comboBox_DevicesDBList2.getSelectedItem().toString().substring(0, 12));
 								updateDevice.setDeviceName(updateDeviceName);
