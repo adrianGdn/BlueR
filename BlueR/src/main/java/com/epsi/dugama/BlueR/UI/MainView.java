@@ -247,14 +247,25 @@ public class MainView {
 						try {
 							// Deletion confirmation
 							if(JOptionPane.showConfirmDialog(null, "Are you sure to delete this device ?", "Deletion confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION) {
-								// 12 is the size of the Bluetooth ID
-								DAO.deleteOneDevice(comboBox_DevicesDBList2.getSelectedItem().toString().substring(0, 12));
-								devices = DAO.getDevices();
-								comboBox_DevicesDBList2.removeAllItems();
-								for (int i = 0; i < devices.size(); i++) {
-									comboBox_DevicesDBList2.addItem(devices.get(i).getIdBluetooth() + " - " + devices.get(i).getDeviceName());
+								List<User> usersForDeletion = DAO.getUsers();
+								boolean userFound = false;
+								int listCounter = 0;
+								while (!userFound && listCounter < usersForDeletion.size()) {
+									if(usersForDeletion.get(listCounter).getDevice().getIdBluetooth().equals(comboBox_DevicesDBList2.getSelectedItem().toString().substring(0, 12))) {
+										userFound = true;
+									}
+									listCounter++;
 								}
-								JOptionPane.showMessageDialog(null, "The device has been correctly deleted.", "Information", JOptionPane.INFORMATION_MESSAGE);
+								if(!userFound) {
+									// 12 is the size of the Bluetooth ID
+									DAO.deleteOneDevice(comboBox_DevicesDBList2.getSelectedItem().toString().substring(0, 12));
+									devices = DAO.getDevices();
+									comboBox_DevicesDBList2.removeAllItems();
+									for (int i = 0; i < devices.size(); i++) {
+										comboBox_DevicesDBList2.addItem(devices.get(i).getIdBluetooth() + " - " + devices.get(i).getDeviceName());
+									}
+									JOptionPane.showMessageDialog(null, "The device has been correctly deleted.", "Information", JOptionPane.INFORMATION_MESSAGE);
+								} else JOptionPane.showMessageDialog(null, "You must delete the user related to that device first.", "Error", JOptionPane.ERROR_MESSAGE);
 							} else JOptionPane.showMessageDialog(null, "The device hasn't been deleted has choosen.", "Information", JOptionPane.INFORMATION_MESSAGE);
 						}
 						catch (Exception deviceNotDeleted) {
@@ -268,7 +279,7 @@ public class MainView {
 						try {
 							// Data request
 							String updateDeviceName = JOptionPane.showInputDialog(null, "Please enter the new device name :", "Update request", JOptionPane.QUESTION_MESSAGE);
-							if (!updateDeviceName.equals(null) && !updateDeviceName.equals("")) {
+							if (!updateDeviceName.equals(null) && !updateDeviceName.equals("") && !updateDeviceName.contains("'")) {
 								// Device update - 12 is the size of the Bluetooth ID
 								Device updateDevice = DAO.getOneDevice(comboBox_DevicesDBList2.getSelectedItem().toString().substring(0, 12));
 								updateDevice.setDeviceName(updateDeviceName);
@@ -468,20 +479,21 @@ public class MainView {
 									boolean txtMobileNumberCorrect = true;
 									boolean txtIdBluetoothCorrect = true;
 									
-									if(txt_UpdateUserFirstName.getText().equals("")) {
+									if(txt_UpdateUserFirstName.getText().equals("") || txt_UpdateUserFirstName.getText().contains("'")) {
 										txtFirstNameCorrect = false;
 									}
-									if(txt_UpdateUserSecondName.getText().equals("")) {
+									if(txt_UpdateUserSecondName.getText().equals("") || txt_UpdateUserSecondName.getText().contains("'")) {
 										txtSecondNameCorrect = false;
 									}
-									if(txt_UpdateUserMailAddress.getText().equals("")) {
+									if(txt_UpdateUserMailAddress.getText().equals("") || txt_UpdateUserMailAddress.getText().contains("'")) {
 										txtMailAddressCorrect = false;
 									}
 									if(!mailType.equals("@gmail.com") && !mailType.equals("@gmail.fr") && !mailType.equals("@me.com") && !mailType.equals("@icloud.com")
-											&& !mailType.equals("@epsi.fr") && !mailType.equals("@hotmail.com") && !mailType.equals("@hotmail.fr") && !mailType.equals("@alexis-dubus.com")) {
+											&& !mailType.equals("@epsi.fr") && !mailType.equals("@hotmail.com") && !mailType.equals("@hotmail.fr") && !mailType.equals("@alexis-dubus.com")
+											|| mailType.contains("'")) {
 										txtMailAddressCorrect = false;
 									}
-									if(txt_UpdateUserPhoneNumber.getText().equals("")) {
+									if(txt_UpdateUserPhoneNumber.getText().equals("") || txt_UpdateUserPhoneNumber.getText().contains("'")) {
 										txtMobileNumberCorrect = false;
 									}
 									
@@ -591,20 +603,25 @@ public class MainView {
 									boolean txtMobileNumberCorrect = true;
 									boolean txtIdBluetoothCorrect = true;
 									
-									if(txt_CreateUserFirstName.getText().equals("First name")) {
+									if(txt_CreateUserFirstName.getText().equals("First name") || txt_CreateUserFirstName.getText().contains("'") 
+											|| txt_CreateUserFirstName.getText().contains("") || txt_CreateUserFirstName.getText().contains(" ")) {
 										txtFirstNameCorrect = false;
 									}
-									if(txt_CreateUserSecondName.getText().equals("Second name")) {
+									if(txt_CreateUserSecondName.getText().equals("Second name") || txt_CreateUserSecondName.getText().contains("'")
+											|| txt_CreateUserSecondName.getText().contains("") || txt_CreateUserSecondName.getText().contains(" ")) {
 										txtSecondNameCorrect = false;
 									}
-									if(txt_CreateUserMailAddress.getText().equals("mail.address@exemple.com")) {
+									if(txt_CreateUserMailAddress.getText().equals("mail.address@exemple.com") || txt_CreateUserMailAddress.getText().contains("'")
+											|| txt_CreateUserMailAddress.getText().contains("") || txt_CreateUserMailAddress.getText().contains(" ")) {
 										txtMailAddressCorrect = false;
 									}
 									if(!mailType.equals("@gmail.com") && !mailType.equals("@gmail.fr") && !mailType.equals("@me.com") && !mailType.equals("@icloud.com")
-											&& !mailType.equals("@epsi.fr") && !mailType.equals("@hotmail.com") && !mailType.equals("@hotmail.fr") && !mailType.equals("@alexis-dubus.com")) {
+											&& !mailType.equals("@epsi.fr") && !mailType.equals("@hotmail.com") && !mailType.equals("@hotmail.fr") && !mailType.equals("@alexis-dubus.com")
+											|| mailType.contains("'") || mailType.contains("") || mailType.contains(" ")) {
 										txtMailAddressCorrect = false;
 									}
-									if(txt_CreateUserPhoneNumber.getText().equals("Phone num.")) {
+									if(txt_CreateUserPhoneNumber.getText().equals("Phone num.") || txt_CreateUserMailAddress.getText().contains("'")
+											|| txt_CreateUserPhoneNumber.getText().contains("") || txt_CreateUserPhoneNumber.getText().contains(" ")) {
 										txtMobileNumberCorrect = false;
 									}
 									
