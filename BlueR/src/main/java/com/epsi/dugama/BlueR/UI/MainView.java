@@ -606,24 +606,23 @@ public class MainView {
 									boolean txtIdBluetoothCorrect = true;
 									
 									if(txt_CreateUserFirstName.getText().equals("First name") || txt_CreateUserFirstName.getText().contains("'") 
-											|| txt_CreateUserFirstName.getText().contains("") || txt_CreateUserFirstName.getText().contains(" ")) {
+											|| txt_CreateUserFirstName.getText().contains(" ")) {
 										txtFirstNameCorrect = false;
 									}
 									if(txt_CreateUserSecondName.getText().equals("Second name") || txt_CreateUserSecondName.getText().contains("'")
-											|| txt_CreateUserSecondName.getText().contains("") || txt_CreateUserSecondName.getText().contains(" ")) {
+											|| txt_CreateUserSecondName.getText().contains(" ")) {
 										txtSecondNameCorrect = false;
 									}
 									if(txt_CreateUserMailAddress.getText().equals("mail.address@exemple.com") || txt_CreateUserMailAddress.getText().contains("'")
-											|| txt_CreateUserMailAddress.getText().contains("") || txt_CreateUserMailAddress.getText().contains(" ")) {
+											|| txt_CreateUserMailAddress.getText().contains(" ")) {
 										txtMailAddressCorrect = false;
 									}
 									if(!mailType.equals("@gmail.com") && !mailType.equals("@gmail.fr") && !mailType.equals("@me.com") && !mailType.equals("@icloud.com")
-											&& !mailType.equals("@epsi.fr") && !mailType.equals("@hotmail.com") && !mailType.equals("@hotmail.fr") && !mailType.equals("@alexis-dubus.com")
-											|| mailType.contains("'") || mailType.contains("") || mailType.contains(" ")) {
+											&& !mailType.equals("@epsi.fr") && !mailType.equals("@hotmail.com") && !mailType.equals("@hotmail.fr") && !mailType.equals("@alexis-dubus.com")) {
 										txtMailAddressCorrect = false;
 									}
 									if(txt_CreateUserPhoneNumber.getText().equals("Phone num.") || txt_CreateUserMailAddress.getText().contains("'")
-											|| txt_CreateUserPhoneNumber.getText().contains("") || txt_CreateUserPhoneNumber.getText().contains(" ")) {
+											|| txt_CreateUserPhoneNumber.getText().contains(" ")) {
 										txtMobileNumberCorrect = false;
 									}
 									
@@ -634,7 +633,7 @@ public class MainView {
 											// We search to find the location of the name and the surname in the string
 											// We update the user
 											User createdUser = new User(txt_CreateUserFirstName.getText(), txt_CreateUserSecondName.getText(), 
-													DAO.getOneDevice(comboBox_CreateUserDevicesList.getSelectedItem().toString()), txt_CreateUserMailAddress.getText(), txt_CreateUserPhoneNumber.getText());
+											DAO.getOneDevice(comboBox_CreateUserDevicesList.getSelectedItem().toString()), txt_CreateUserMailAddress.getText(), txt_CreateUserPhoneNumber.getText());
 											DAO.addUser(createdUser);
 											// We get the updated users list
 											users = DAO.getUsers();
