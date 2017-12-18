@@ -186,7 +186,7 @@ public class MainView {
 				/////////////////////////////// Action for the "Send data" here ///////////////////////////////
 				String bluetoothId = comboBox_DevicesList.getSelectedItem().toString().substring(0, 12);
 				User selectedUser = DAO.getTheUserLinkedToTheDevice(bluetoothId);
-				if(!selectedUser.getMailAddress().equals(null))
+				if(!(selectedUser.getMailAddress() == null))
 				{
 					SendMailTLS.sendMail(selectedUser.getMailAddress());
 					JOptionPane.showMessageDialog(null, "The promotional email has been correctly send.\nThanks for using BlueR app.", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -487,7 +487,7 @@ public class MainView {
 									if(txt_UpdateUserMailAddress.getText().equals("") || txt_UpdateUserMailAddress.getText().contains("'")) {
 										txtMailAddressCorrect = false;
 									}
-									if(!mailType.equals("@gmail.com") && !mailType.equals("@gmail.fr") && !mailType.equals("@me.com") && !mailType.equals("@icloud.com")
+									if(!mailType.equals("@gmail.com") && !mailType.equals("@gmail.fr") && !mailType.equals("@me.com") && !mailType.equals("@icloud.com") && !mailType.equals("@si4p.fr")
 											&& !mailType.equals("@epsi.fr") && !mailType.equals("@hotmail.com") && !mailType.equals("@hotmail.fr") && !mailType.equals("@alexis-dubus.com")
 											|| mailType.contains("'")) {
 										txtMailAddressCorrect = false;
@@ -615,7 +615,7 @@ public class MainView {
 											|| txt_CreateUserMailAddress.getText().equals("") || txt_CreateUserMailAddress.getText().contains(" ")) {
 										txtMailAddressCorrect = false;
 									}
-									if(!mailType.equals("@gmail.com") && !mailType.equals("@gmail.fr") && !mailType.equals("@me.com") && !mailType.equals("@icloud.com")
+									if(!mailType.equals("@gmail.com") && !mailType.equals("@gmail.fr") && !mailType.equals("@me.com") && !mailType.equals("@icloud.com") && !mailType.equals("@si4p.fr")
 											&& !mailType.equals("@epsi.fr") && !mailType.equals("@hotmail.com") && !mailType.equals("@hotmail.fr") && !mailType.equals("@alexis-dubus.com")) {
 										txtMailAddressCorrect = false;
 									}
