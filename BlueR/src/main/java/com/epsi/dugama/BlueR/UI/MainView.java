@@ -263,7 +263,7 @@ public class MainView {
 									}
 									JOptionPane.showMessageDialog(null, "The device has been correctly deleted.", "Information", JOptionPane.INFORMATION_MESSAGE);
 								} else JOptionPane.showMessageDialog(null, "You must delete the user related to that device first.", "Error", JOptionPane.ERROR_MESSAGE);
-							} else JOptionPane.showMessageDialog(null, "The device hasn't been deleted has choosen.", "Information", JOptionPane.INFORMATION_MESSAGE);
+							} else JOptionPane.showMessageDialog(null, "The device deletion has been cancelled.", "Information", JOptionPane.INFORMATION_MESSAGE);
 						}
 						catch (Exception deviceNotDeleted) {
 							JOptionPane.showMessageDialog(null, "An error has occur when trying to delete this device.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -400,7 +400,7 @@ public class MainView {
 									comboBox_UserDBList.addItem(users.get(i).getFirstName() + " " + users.get(i).getSecondName() + " - " + users.get(i).getMailAddress());
 								}
 								JOptionPane.showMessageDialog(null, "The user has been correctly deleted.", "Information", JOptionPane.INFORMATION_MESSAGE);
-							} else JOptionPane.showMessageDialog(null, "The user hasn't been deleted has choosen.", "Information", JOptionPane.INFORMATION_MESSAGE);
+							} else JOptionPane.showMessageDialog(null, "The user creation has been cancelled.", "Information", JOptionPane.INFORMATION_MESSAGE);
 						}
 						catch (Exception userNotDeleted) {
 							JOptionPane.showMessageDialog(null, "An error has occur when trying to delete this user.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -518,7 +518,7 @@ public class MainView {
 												comboBox_UserDBList.addItem(users.get(i).getFirstName() + " " + users.get(i).getSecondName() + " - " + users.get(i).getMailAddress());
 											}
 											JOptionPane.showMessageDialog(null, "The user has been correctly updated.", "Information", JOptionPane.INFORMATION_MESSAGE);
-										} else JOptionPane.showMessageDialog(null, "The user hasn't been updated has choosen.", "Information", JOptionPane.INFORMATION_MESSAGE);
+										} else JOptionPane.showMessageDialog(null, "The user update has been cancelled.", "Information", JOptionPane.INFORMATION_MESSAGE);
 										// We delete the label of the interface
 										txt_UpdateUserFirstName.setVisible(false);
 										txt_UpdateUserSecondName.setVisible(false);
@@ -655,7 +655,7 @@ public class MainView {
 													comboBox_UserDBList.addItem(users.get(i).getFirstName() + " " + users.get(i).getSecondName() + " - " + users.get(i).getMailAddress());
 												}
 												JOptionPane.showMessageDialog(null, "The user has been correctly created.", "Information", JOptionPane.INFORMATION_MESSAGE);
-											} else JOptionPane.showMessageDialog(null, "You cannot add a user that exist already.", "Warning", JOptionPane.WARNING_MESSAGE);
+											} else JOptionPane.showMessageDialog(null, "You cannot add a user that already exist.", "Warning", JOptionPane.WARNING_MESSAGE);
 										} else JOptionPane.showMessageDialog(null, "The user hasn't been created has choosen.", "Information", JOptionPane.INFORMATION_MESSAGE);
 										// We delete the label of the interface
 										txt_CreateUserFirstName.setVisible(false);
