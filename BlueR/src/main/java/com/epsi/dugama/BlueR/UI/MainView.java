@@ -113,10 +113,10 @@ public class MainView {
 		labelInfoForSendInfo.setBounds(10, 91, 412, 14);
 		frmBluer.getContentPane().add(labelInfoForSendInfo);
 		
-		final JButton btnSendData = new JButton("Send data");
+		final JButton btnSendData = new JButton("Send promotional email");
 		btnSendData.setEnabled(false);
 		btnSendData.setFont(new Font("Arial", Font.PLAIN, 11));
-		btnSendData.setBounds(170, 105, 85, 23);
+		btnSendData.setBounds(132, 105, 145, 23);
 		frmBluer.getContentPane().add(btnSendData);
 		
 		Canvas canvasSeparatorSendInfo_EndApp = new Canvas();
@@ -189,7 +189,7 @@ public class MainView {
 				if(!selectedUser.getMailAddress().equals(null))
 				{
 					SendMailTLS.sendMail(selectedUser.getMailAddress());
-					JOptionPane.showMessageDialog(null, "The data has been correctly send.\nThanks for using BlueR app.", "Information", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The promotional email has been correctly send.\nThanks for using BlueR app.", "Information", JOptionPane.INFORMATION_MESSAGE);
 				} else JOptionPane.showMessageDialog(null, "Actually, this detected device has no user registered with it.\nPlease register a user and a valid mail address for that user before trying to send data.", "Error", JOptionPane.WARNING_MESSAGE);
 			}
 		});
