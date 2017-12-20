@@ -14,9 +14,12 @@ import com.mysql.jdbc.Statement;
  * @author Adrian Gandon
  */
 public class DAO {
-	private static String url = "jdbc:mysql://localhost/bluer";
-	private static String login = "root";
-	private static String mdp = "";
+	/*private static String url = "jdbc:mysql://62.210.110.203:3306/pweb913";
+	private static String login = "pweb913";
+	private static String mdp = "rUbG62f628TZLvRh"; */
+	private static String url = "jdbc:mysql://bauduinlucas.ddns.net/bluetoothdubus";
+	private static String login = "dubus";
+	private static String mdp = "Mw2vvCHDko8xNH5v";
 	
 	/**
 	 * Method that allow us to get the device which was present on DB.
