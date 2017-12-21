@@ -3,7 +3,6 @@ package com.epsi.dugama.BlueR.bluetooth;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
 import javax.bluetooth.DeviceClass;
 import javax.bluetooth.DiscoveryAgent;
 import javax.bluetooth.DiscoveryListener;
@@ -16,11 +15,9 @@ import javax.obex.ClientSession;
 import javax.obex.HeaderSet;
 import javax.obex.Operation;
 import javax.obex.ResponseCodes;
-
 import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.DataElement;
 import com.epsi.dugama.BlueR.Device;
-
 import com.intel.bluetooth.RemoteDeviceHelper;
 
 public class DeviceDiscovery implements DiscoveryListener {
