@@ -31,6 +31,10 @@ public class DeviceDiscovery implements DiscoveryListener {
 
 	private static Object lock = new Object();
 
+	/**
+	 * Start of the Device Discovery
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		init();
 	}
@@ -50,7 +54,7 @@ public class DeviceDiscovery implements DiscoveryListener {
 		bluetoothDevicesDiscovered.clear();
 		devicesDiscovered.clear();
 		try {
-			LocalDevice localDevice = LocalDevice.getLocalDevice();
+			LocalDevice localDevice = LocalDevice.getLocalDevice(); //donne les devices en local
 			DiscoveryAgent agent = localDevice.getDiscoveryAgent();
 			UUID[] searchUuidSet = new UUID[1] ;
 			searchUuidSet[0] = new UUID(0x1105);
@@ -134,6 +138,10 @@ public class DeviceDiscovery implements DiscoveryListener {
 
 	}
 
+	/**
+	 * (non-Javadoc)
+	 * @see javax.bluetooth.DiscoveryListener#serviceSearchCompleted(int, int)
+	 */
 	public void serviceSearchCompleted(int arg0, int arg1) {
 		synchronized (lock) {
 			lock.notify();
@@ -141,7 +149,8 @@ public class DeviceDiscovery implements DiscoveryListener {
 	}
 	
 	/**
-	 * 
+	 * Pour la connexion à d'autre devices
+	 * Inutilisé
 	 */
 	public void servicesDiscovered(int arg0, ServiceRecord[] services) {
 		for (int i = 0; i < services.length; i++) {
@@ -172,6 +181,11 @@ public class DeviceDiscovery implements DiscoveryListener {
 
 	}
 	
+	/**
+	 * Test function for the connection. 
+	 * Unused
+	 * @param btDevice
+	 */
 	public static void testConnexion(RemoteDevice btDevice)
 	{
 		UUID serviceUUID = OBEX_OBJECT_PUSH;
